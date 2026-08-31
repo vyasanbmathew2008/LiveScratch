@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>SB3 Web</title>
 
@@ -16,217 +11,120 @@
 
 <body>
 
-    <!-- HEADER -->
-    <header class="header">
+<header>
+    <h1>SB3 Web</h1>
+    <p>Play Scratch games directly in your browser</p>
+</header>
 
-        <div class="container">
+<main>
 
-            <h1>SB3 Web</h1>
+    <section class="upload-box" id="dropZone">
 
-            <p>
-                Play your Scratch projects directly in your browser
-            </p>
+        <div class="upload-icon">📁</div>
+
+        <h2>Upload your Scratch project</h2>
+
+        <p>Drag & drop your <b>.sb3</b> file here</p>
+
+        <span>or</span>
+
+        <label for="fileInput" class="browse-btn">
+            Browse Files
+        </label>
+
+        <input
+            type="file"
+            id="fileInput"
+            accept=".sb3"
+            hidden
+        >
+
+        <small>
+            Your project stays in your browser.
+        </small>
+
+    </section>
+
+
+    <section
+        id="projectInfo"
+        class="project-info hidden"
+    >
+
+        <h2>Project</h2>
+
+        <div class="file-card">
+
+            <div>
+                <strong id="fileName"></strong>
+                <p id="fileSize"></p>
+            </div>
+
+            <button id="removeBtn">
+                Remove
+            </button>
 
         </div>
 
-    </header>
+        <div class="actions">
 
+            <button id="previewBtn">
+                ▶ Play Game
+            </button>
 
-    <!-- MAIN -->
-    <main class="container">
+            <button id="convertBtn">
+                Download Web Game
+            </button>
 
+        </div>
 
-        <!-- UPLOAD -->
-        <section
-            class="upload-box"
-            id="dropZone"
-        >
+    </section>
 
-            <div class="upload-icon">
-                📁
-            </div>
 
-            <h2>
-                Upload your Scratch project
-            </h2>
+    <section
+        id="gameSection"
+        class="game-section hidden"
+    >
 
-            <p>
-                Drag & drop your <strong>.sb3</strong> file here
-            </p>
+        <div class="game-header">
 
-            <div class="or">
-                or
-            </div>
+            <h2>Game</h2>
 
-            <label
-                for="fileInput"
-                class="browse-btn"
-            >
-                Browse Files
-            </label>
+            <button id="stopBtn">
+                ■ Stop
+            </button>
 
-            <input
-                type="file"
-                id="fileInput"
-                accept=".sb3"
-                hidden
-            >
+        </div>
 
-            <p class="privacy">
-                🔒 Your project stays in your browser.
-            </p>
+        <div id="game"></div>
 
-        </section>
+    </section>
 
 
+    <section
+        id="status"
+        class="status hidden"
+    >
 
-        <!-- PROJECT INFORMATION -->
-        <section
-            class="project-info hidden"
-            id="projectInfo"
-        >
+        <span id="statusIcon">ℹ️</span>
 
-            <div class="section-title">
+        <p id="statusText"></p>
 
-                <h2>
-                    Project
-                </h2>
+    </section>
 
-            </div>
+</main>
 
 
-            <div class="file-card">
+<footer>
+    SB3 Web · Open Source
+</footer>
 
-                <div class="file-details">
 
-                    <div class="file-icon">
-                        🎮
-                    </div>
-
-                    <div>
-
-                        <strong id="fileName">
-                            project.sb3
-                        </strong>
-
-                        <p id="fileSize">
-                            0 KB
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="remove-btn"
-                    id="removeBtn"
-                >
-                    Remove
-                </button>
-
-            </div>
-
-
-            <!-- ACTIONS -->
-            <div class="actions">
-
-                <button
-                    class="play-btn"
-                    id="previewBtn"
-                >
-                    ▶ Play Game
-                </button>
-
-                <button
-                    class="convert-btn"
-                    id="convertBtn"
-                >
-                    Download Web Game
-                </button>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- GAME -->
-        <section
-            class="game-section hidden"
-            id="gameSection"
-        >
-
-            <div class="game-header">
-
-                <h2>
-                    Game
-                </h2>
-
-                <button
-                    id="stopBtn"
-                    class="stop-btn"
-                >
-                    ■ Stop
-                </button>
-
-            </div>
-
-
-            <div
-                id="game"
-                class="game-container"
-            ></div>
-
-        </section>
-
-
-
-        <!-- STATUS -->
-        <section
-            class="status hidden"
-            id="status"
-        >
-
-            <span id="statusIcon">
-                ℹ️
-            </span>
-
-            <p id="statusText">
-                Ready
-            </p>
-
-        </section>
-
-
-    </main>
-
-
-
-    <!-- FOOTER -->
-    <footer>
-
-        <p>
-            SB3 Web · Open Source
-        </p>
-
-    </footer>
-
-
-
-    <!--
-        TurboWarp Scaffolding
-
-        This provides the Scratch-compatible
-        runtime used to run the SB3 project.
-    -->
-
-    <script src="https://unpkg.com/@turbowarp/scaffolding"></script>
-
-
-    <!-- YOUR JAVASCRIPT -->
-    <script src="script.js"></script>
+<!--
+    IMPORTANT:
+    Load our JavaScript as a module.
+-->
+<script type="module" src="script.js"></script>
 
 </body>
-
 </html>
