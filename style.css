@@ -1,205 +1,41 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
     font-family: Arial, sans-serif;
+    text-align: center;
     background: #f5f5f5;
-    color: #222;
-    min-height: 100vh;
+    margin: 0;
+    padding: 40px;
 }
 
-header {
-    text-align: center;
-    padding: 50px 20px 30px;
+h1 {
+    font-size: 40px;
 }
 
-header h1 {
-    font-size: 42px;
-    margin-bottom: 10px;
-}
-
-header p {
-    color: #666;
-}
-
-main {
-    width: min(760px, 92%);
-    margin: auto;
-}
-
-.upload-box {
-    background: white;
-    border: 2px dashed #aaa;
-    border-radius: 18px;
-    padding: 60px 30px;
-    text-align: center;
-}
-
-.upload-box.dragover {
-    border-color: #222;
-    background: #fafafa;
-}
-
-.upload-icon {
-    font-size: 55px;
-    margin-bottom: 20px;
-}
-
-.upload-box h2 {
-    margin-bottom: 10px;
-}
-
-.upload-box p {
-    color: #666;
-    margin-bottom: 15px;
-}
-
-.upload-box span {
-    display: block;
-    color: #999;
-    margin: 10px;
-}
-
-.browse-btn {
-    display: inline-block;
-    background: #222;
-    color: white;
-    padding: 13px 25px;
-    border-radius: 9px;
-    cursor: pointer;
-}
-
-.upload-box small {
-    display: block;
-    margin-top: 25px;
-    color: #777;
-}
-
-.project-info {
-    margin-top: 30px;
-}
-
-.file-card {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.file-card p {
-    color: #777;
-    margin-top: 5px;
-}
-
-.file-card button {
+button {
+    padding: 12px 20px;
+    margin: 5px;
     border: none;
-    background: #eee;
-    padding: 9px 14px;
-    border-radius: 7px;
+    border-radius: 8px;
     cursor: pointer;
-}
-
-.actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.actions button {
-    flex: 1;
-    border: none;
-    padding: 14px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#previewBtn {
     background: #222;
     color: white;
 }
 
-#convertBtn {
-    background: #ddd;
+button:hover {
+    opacity: 0.8;
 }
 
-.game-section {
-    margin-top: 30px;
-    padding: 20px;
-    background: #111;
-    border-radius: 16px;
-}
-
-.game-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    margin-bottom: 15px;
-}
-
-#stopBtn {
-    background: #333;
-    color: white;
-    border: none;
-    padding: 9px 15px;
-    border-radius: 7px;
-    cursor: pointer;
+#status {
+    margin: 20px;
 }
 
 #game {
+    width: 480px;
+    height: 360px;
+    margin: 30px auto;
+    background: black;
+}
+
+#game > * {
     width: 100%;
-    max-width: 640px;
-    margin: auto;
-    overflow: hidden;
-}
-
-#game canvas {
-    display: block;
-    width: 100% !important;
-    height: auto !important;
-}
-
-.status {
-    margin-top: 20px;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-
-    display: flex;
-    gap: 10px;
-}
-
-.hidden {
-    display: none !important;
-}
-
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #888;
-}
-
-@media (max-width: 600px) {
-
-    header h1 {
-        font-size: 34px;
-    }
-
-    .file-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .actions {
-        flex-direction: column;
-    }
-
+    height: 100%;
 }
