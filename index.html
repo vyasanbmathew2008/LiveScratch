@@ -11,120 +11,36 @@
 
 <body>
 
-<header>
     <h1>SB3 Web</h1>
-    <p>Play Scratch games directly in your browser</p>
-</header>
 
-<main>
+    <p>Upload and play your Scratch game</p>
 
-    <section class="upload-box" id="dropZone">
-
-        <div class="upload-icon">📁</div>
-
-        <h2>Upload your Scratch project</h2>
-
-        <p>Drag & drop your <b>.sb3</b> file here</p>
-
-        <span>or</span>
-
-        <label for="fileInput" class="browse-btn">
-            Browse Files
-        </label>
-
-        <input
-            type="file"
-            id="fileInput"
-            accept=".sb3"
-            hidden
-        >
-
-        <small>
-            Your project stays in your browser.
-        </small>
-
-    </section>
-
-
-    <section
-        id="projectInfo"
-        class="project-info hidden"
+    <input
+        type="file"
+        id="fileInput"
+        accept=".sb3"
     >
 
-        <h2>Project</h2>
+    <br><br>
 
-        <div class="file-card">
+    <button id="playButton">
+        Play Game
+    </button>
 
-            <div>
-                <strong id="fileName"></strong>
-                <p id="fileSize"></p>
-            </div>
+    <button id="stopButton">
+        Stop
+    </button>
 
-            <button id="removeBtn">
-                Remove
-            </button>
+    <p id="status"></p>
 
-        </div>
-
-        <div class="actions">
-
-            <button id="previewBtn">
-                ▶ Play Game
-            </button>
-
-            <button id="convertBtn">
-                Download Web Game
-            </button>
-
-        </div>
-
-    </section>
+    <div id="game"></div>
 
 
-    <section
-        id="gameSection"
-        class="game-section hidden"
-    >
+    <!-- TurboWarp Scaffolding -->
+    <script src="https://cdn.jsdelivr.net/npm/@turbowarp/scaffolding@0.4.0/dist/scaffolding-min.js"></script>
 
-        <div class="game-header">
-
-            <h2>Game</h2>
-
-            <button id="stopBtn">
-                ■ Stop
-            </button>
-
-        </div>
-
-        <div id="game"></div>
-
-    </section>
-
-
-    <section
-        id="status"
-        class="status hidden"
-    >
-
-        <span id="statusIcon">ℹ️</span>
-
-        <p id="statusText"></p>
-
-    </section>
-
-</main>
-
-
-<footer>
-    SB3 Web · Open Source
-</footer>
-
-
-<!--
-    IMPORTANT:
-    Load our JavaScript as a module.
--->
-<script type="module" src="script.js"></script>
+    <!-- Our JavaScript -->
+    <script src="script.js"></script>
 
 </body>
 </html>
