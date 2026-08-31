@@ -1,9 +1,13 @@
 let selectedFile = null;
+
 let scaffolding = null;
 
 
 const fileInput =
     document.getElementById("fileInput");
+
+const fileName =
+    document.getElementById("fileName");
 
 const playButton =
     document.getElementById("playButton");
@@ -11,134 +15,260 @@ const playButton =
 const stopButton =
     document.getElementById("stopButton");
 
-const game =
-    document.getElementById("game");
-
 const status =
     document.getElementById("status");
 
+const game =
+    document.getElementById("game");
+
 
 // ========================================
-// SELECT SB3
+// FILE SELECT
 // ========================================
 
-fileInput.addEventListener("change", () => {
+fileInput.addEventListener(
+    "change",
+    function () {
 
-    const file = fileInput.files[0];
+        const file =
+            fileInput.files[0];
 
-    if (!file) {
-        return;
-    }
+        if (!file) {
 
-    if (!file.name.toLowerCase().endsWith(".sb3")) {
+            return;
+
+        }
+
+
+        if (
+            !file.name
+                .toLowerCase()
+                .endsWith(".sb3")
+        ) {
+
+            status.textContent =
+                "❌ Please select an SB3 file.";
+
+            return;
+
+        }
+
+
+        selectedFile = file;
+
+        fileName.textContent =
+            file.name;
 
         status.textContent =
-            "Please select an .sb3 file.";
+            "✅ SB3 loaded. Click Play Game.";
 
-        return;
     }
-
-    selectedFile = file;
-
-    status.textContent =
-        "Loaded: " + file.name;
-
-});
+);
 
 
 // ========================================
 // PLAY
 // ========================================
 
-playButton.addEventListener("click", async () => {
+playButton.addEventListener(
+    "click",
+    async function () {
 
-    if (!selectedFile) {
+        if (!selectedFile) {
 
-        status.textContent =
-            "Select an SB3 file first.";
+            status.textContent =
+                "❌ Select an SB3 file first.";
 
-        return;
+            return;
+
+        }
+
+
+        try {
+
+            status.textContent =
+                "⏳ Starting Scratch runtime...";
+
+
+            // Remove previous runtime
+
+            if (scaffolding) {
+
+                try {
+
+                    scaffolding.stopAll();
+
+                } catch (e) {}
+
+            }
+
+
+            game.innerHTML = "";
+
+
+            // ====================================
+            // CREATE TURBOWARP SCAFFOLDING
+            // ====================================
+
+            scaffolding =
+                new Scaffolding.Scaffolding();
+
+
+            // ====================================
+            // CONFIGURATION
+            // ====================================
+
+            scaffolding.width = 480;
+
+            scaffolding.height = 360;
+
+            scaffolding.resizeMode =
+                "preserve-ratio";
+
+            scaffolding.editableLists =
+                false;
+
+            scaffolding.usePackagedRuntime =
+                true;
+
+
+            // ====================================
+            // INITIALIZE
+            // ====================================
+
+            scaffolding.setup();
+
+
+            // ====================================
+            // ADD TO WEBSITE
+            // ====================================
+
+            scaffolding.appendTo(game);
+
+
+            // ====================================
+            // CONFIGURE ASSET STORAGE
+            // ====================================
+
+            const storage =
+                scaffolding.storage;
+
+
+            storage.addWebStore(
+
+                [
+                    storage.AssetType.ImageVector,
+
+                    storage.AssetType.ImageBitmap,
+
+                    storage.AssetType.Sound
+                ],
+
+                asset => {
+
+                    return (
+                        "https://assets.scratch.mit.edu/internalapi/asset/"
+                        +
+                        asset.assetId
+                        +
+                        "."
+                        +
+                        asset.dataFormat
+                        +
+                        "/get/"
+                    );
+
+                }
+
+            );
+
+
+            // ====================================
+            // READ SB3
+            // ====================================
+
+            status.textContent =
+                "⏳ Reading SB3 project...";
+
+
+            const project =
+                await selectedFile.arrayBuffer();
+
+
+            // ====================================
+            // LOAD PROJECT
+            // ====================================
+
+            status.textContent =
+                "⏳ Loading game...";
+
+
+            await scaffolding.loadProject(
+                project
+            );
+
+
+            // ====================================
+            // START GAME
+            // ====================================
+
+            scaffolding.greenFlag();
+
+
+            status.textContent =
+                "🎮 Game is running!";
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "FULL ERROR:",
+                error
+            );
+
+
+            status.textContent =
+                "❌ Error: " +
+                error.message;
+
+        }
+
     }
-
-
-    try {
-
-        status.textContent =
-            "Loading game...";
-
-
-        // Remove old game
-        game.innerHTML = "";
-
-
-        // Create TurboWarp Scaffolding
-        scaffolding =
-            new Scaffolding.Scaffolding();
-
-
-        // Game size
-        scaffolding.width = 480;
-
-        scaffolding.height = 360;
-
-        scaffolding.resizeMode =
-            "preserve-ratio";
-
-
-        // Initialize
-        scaffolding.setup();
-
-
-        // Put game on page
-        scaffolding.appendTo(game);
-
-
-        // Read SB3
-        const project =
-            await selectedFile.arrayBuffer();
-
-
-        // Load project
-        await scaffolding.loadProject(
-            project
-        );
-
-
-        // Start Scratch green flag
-        scaffolding.greenFlag();
-
-
-        status.textContent =
-            "Game running!";
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        status.textContent =
-            "Error: " + error.message;
-
-    }
-
-});
+);
 
 
 // ========================================
 // STOP
 // ========================================
 
-stopButton.addEventListener("click", () => {
+stopButton.addEventListener(
+    "click",
+    function () {
 
-    if (scaffolding) {
+        if (!scaffolding) {
 
-        scaffolding.stopAll();
+            return;
 
-        game.innerHTML = "";
+        }
 
-        status.textContent =
-            "Game stopped.";
+
+        try {
+
+            scaffolding.stopAll();
+
+            game.innerHTML = "";
+
+            status.textContent =
+                "⏹️ Game stopped.";
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
 
     }
-
-});
+);
