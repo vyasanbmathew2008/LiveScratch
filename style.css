@@ -1,561 +1,205 @@
-/* =========================================
-   RESET
-========================================= */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
-
-
-/* =========================================
-   BODY
-========================================= */
 
 body {
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, sans-serif;
     background: #f5f5f5;
-
     color: #222;
-
     min-height: 100vh;
-
 }
 
-
-/* =========================================
-   CONTAINER
-========================================= */
-
-.container {
-
-    width: min(
-        760px,
-        92%
-    );
-
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-
-/* =========================================
-   HEADER
-========================================= */
-
-.header {
-
+header {
     text-align: center;
-
-    padding-top: 55px;
-    padding-bottom: 35px;
-
+    padding: 50px 20px 30px;
 }
 
-
-.header h1 {
-
+header h1 {
     font-size: 42px;
-
     margin-bottom: 10px;
-
 }
 
-
-.header p {
-
+header p {
     color: #666;
-
-    font-size: 16px;
-
 }
 
-
-/* =========================================
-   UPLOAD BOX
-========================================= */
+main {
+    width: min(760px, 92%);
+    margin: auto;
+}
 
 .upload-box {
-
     background: white;
-
     border: 2px dashed #aaa;
-
     border-radius: 18px;
-
-    padding: 65px 30px;
-
+    padding: 60px 30px;
     text-align: center;
-
-    transition:
-        border-color 0.2s,
-        transform 0.2s,
-        background 0.2s;
-
 }
-
 
 .upload-box.dragover {
-
     border-color: #222;
-
     background: #fafafa;
-
-    transform: scale(1.01);
-
 }
-
 
 .upload-icon {
-
     font-size: 55px;
-
     margin-bottom: 20px;
-
 }
-
 
 .upload-box h2 {
-
-    font-size: 24px;
-
     margin-bottom: 10px;
-
 }
-
 
 .upload-box p {
-
     color: #666;
-
     margin-bottom: 15px;
-
 }
 
-
-.or {
-
+.upload-box span {
+    display: block;
     color: #999;
-
-    margin: 12px 0;
-
+    margin: 10px;
 }
-
 
 .browse-btn {
-
     display: inline-block;
-
     background: #222;
-
     color: white;
-
     padding: 13px 25px;
-
     border-radius: 9px;
-
     cursor: pointer;
-
-    font-weight: 600;
-
-    transition: opacity 0.2s;
-
 }
 
-
-.browse-btn:hover {
-
-    opacity: 0.8;
-
+.upload-box small {
+    display: block;
+    margin-top: 25px;
+    color: #777;
 }
-
-
-.privacy {
-
-    margin-top: 30px;
-
-    font-size: 13px;
-
-}
-
-
-/* =========================================
-   PROJECT INFO
-========================================= */
 
 .project-info {
-
     margin-top: 30px;
-
 }
-
-
-.section-title {
-
-    margin-bottom: 12px;
-
-}
-
-
-.section-title h2 {
-
-    font-size: 22px;
-
-}
-
-
-/* =========================================
-   FILE CARD
-========================================= */
 
 .file-card {
-
     background: white;
-
+    padding: 20px;
     border-radius: 12px;
 
-    padding: 18px 20px;
-
     display: flex;
-
-    align-items: center;
-
     justify-content: space-between;
-
-    gap: 15px;
-
-}
-
-
-.file-details {
-
-    display: flex;
-
     align-items: center;
-
-    gap: 15px;
-
 }
 
-
-.file-icon {
-
-    font-size: 32px;
-
-}
-
-
-.file-details strong {
-
-    display: block;
-
-    word-break: break-word;
-
-}
-
-
-.file-details p {
-
+.file-card p {
     color: #777;
-
     margin-top: 5px;
-
-    font-size: 14px;
-
 }
 
-
-.remove-btn {
-
+.file-card button {
     border: none;
-
     background: #eee;
-
     padding: 9px 14px;
-
     border-radius: 7px;
-
     cursor: pointer;
-
 }
-
-
-.remove-btn:hover {
-
-    background: #ddd;
-
-}
-
-
-/* =========================================
-   ACTIONS
-========================================= */
 
 .actions {
-
     display: flex;
-
     gap: 12px;
-
     margin-top: 15px;
-
 }
-
 
 .actions button {
-
     flex: 1;
-
-    padding: 14px;
-
     border: none;
-
+    padding: 14px;
     border-radius: 9px;
-
     cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: 600;
-
+    font-weight: bold;
 }
 
-
-.play-btn {
-
+#previewBtn {
     background: #222;
-
     color: white;
-
 }
 
-
-.play-btn:hover {
-
-    opacity: 0.85;
-
-}
-
-
-.convert-btn {
-
+#convertBtn {
     background: #ddd;
-
-    color: #222;
-
 }
-
-
-.convert-btn:hover {
-
-    background: #ccc;
-
-}
-
-
-/* =========================================
-   GAME
-========================================= */
 
 .game-section {
-
     margin-top: 30px;
-
-    background: #111;
-
-    border-radius: 16px;
-
     padding: 20px;
-
+    background: #111;
+    border-radius: 16px;
 }
-
 
 .game-header {
-
-    color: white;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    margin-bottom: 15px;
-
-}
-
-
-.game-header h2 {
-
-    font-size: 20px;
-
-}
-
-
-.stop-btn {
-
-    border: none;
-
-    background: #333;
-
     color: white;
+    margin-bottom: 15px;
+}
 
+#stopBtn {
+    background: #333;
+    color: white;
+    border: none;
     padding: 9px 15px;
-
     border-radius: 7px;
-
     cursor: pointer;
-
 }
 
-
-.stop-btn:hover {
-
-    background: #444;
-
-}
-
-
-/* =========================================
-   GAME CONTAINER
-========================================= */
-
-.game-container {
-
+#game {
     width: 100%;
-
     max-width: 640px;
-
     margin: auto;
-
-    background: black;
-
     overflow: hidden;
-
 }
 
-
-/*
-    TurboWarp creates the canvas inside
-    this container.
-*/
-
-.game-container canvas {
-
+#game canvas {
     display: block;
-
     width: 100% !important;
-
     height: auto !important;
-
 }
-
-
-/* =========================================
-   STATUS
-========================================= */
 
 .status {
-
     margin-top: 20px;
-
-    padding: 15px 18px;
-
+    padding: 15px;
     background: white;
-
     border-radius: 10px;
 
     display: flex;
-
-    align-items: center;
-
     gap: 10px;
-
 }
-
-
-.status p {
-
-    color: #555;
-
-}
-
-
-/* =========================================
-   FOOTER
-========================================= */
-
-footer {
-
-    text-align: center;
-
-    padding: 45px 20px;
-
-    color: #888;
-
-    font-size: 14px;
-
-}
-
-
-/* =========================================
-   HIDDEN
-========================================= */
 
 .hidden {
-
     display: none !important;
-
 }
 
-
-/* =========================================
-   MOBILE
-========================================= */
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+}
 
 @media (max-width: 600px) {
 
-    .header {
-
-        padding-top: 35px;
-
-    }
-
-
-    .header h1 {
-
+    header h1 {
         font-size: 34px;
-
     }
-
-
-    .upload-box {
-
-        padding: 45px 20px;
-
-    }
-
 
     .file-card {
-
-        align-items: flex-start;
-
         flex-direction: column;
-
+        align-items: flex-start;
+        gap: 15px;
     }
 
-
     .actions {
-
         flex-direction: column;
-
     }
 
 }
