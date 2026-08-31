@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SB3 Web</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>SB3 Web</h1>
+        <p>Convert Scratch projects into web games</p>
+    </header>
+
+    <main>
+
+        <section class="upload-box" id="dropZone">
+
+            <div class="upload-icon">📁</div>
+
+            <h2>Upload your SB3 project</h2>
+
+            <p>Drag & drop your .sb3 file here</p>
+
+            <span>or</span>
+
+            <label for="fileInput" class="browse-btn">
+                Browse Files
+            </label>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept=".sb3"
+                hidden
+            >
+
+            <p class="privacy">
+                Your project is processed locally in your browser.
+            </p>
+
+        </section>
+
+
+        <section id="projectInfo" class="project-info hidden">
+
+            <h2>Project</h2>
+
+            <div class="file-card">
+
+                <div>
+                    <strong id="fileName"></strong>
+                    <p id="fileSize"></p>
+                </div>
+
+                <button id="removeBtn">
+                    Remove
+                </button>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button id="previewBtn">
+                    Preview
+                </button>
+
+                <button id="convertBtn">
+                    Convert to Web
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section id="status" class="status hidden">
+            <p id="statusText"></p>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>SB3 Web · Open Source</p>
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
