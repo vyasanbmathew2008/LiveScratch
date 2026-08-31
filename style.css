@@ -1,151 +1,561 @@
+/* =========================================
+   RESET
+========================================= */
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+
+
+/* =========================================
+   BODY
+========================================= */
 
 body {
-    font-family: Arial, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background: #f5f5f5;
+
     color: #222;
+
     min-height: 100vh;
+
 }
 
-header {
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+
+    width: min(
+        760px,
+        92%
+    );
+
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+
     text-align: center;
-    padding: 50px 20px 30px;
+
+    padding-top: 55px;
+    padding-bottom: 35px;
+
 }
 
-header h1 {
+
+.header h1 {
+
     font-size: 42px;
+
     margin-bottom: 10px;
+
 }
 
-header p {
+
+.header p {
+
     color: #666;
+
+    font-size: 16px;
+
 }
 
-main {
-    width: min(700px, 92%);
-    margin: auto;
-}
+
+/* =========================================
+   UPLOAD BOX
+========================================= */
 
 .upload-box {
+
     background: white;
+
     border: 2px dashed #aaa;
-    border-radius: 16px;
-    padding: 60px 30px;
+
+    border-radius: 18px;
+
+    padding: 65px 30px;
+
     text-align: center;
-    transition: 0.2s;
+
+    transition:
+        border-color 0.2s,
+        transform 0.2s,
+        background 0.2s;
+
 }
+
 
 .upload-box.dragover {
+
     border-color: #222;
+
+    background: #fafafa;
+
     transform: scale(1.01);
+
 }
+
 
 .upload-icon {
-    font-size: 50px;
+
+    font-size: 55px;
+
     margin-bottom: 20px;
+
 }
+
 
 .upload-box h2 {
+
+    font-size: 24px;
+
     margin-bottom: 10px;
+
 }
+
 
 .upload-box p {
+
     color: #666;
+
     margin-bottom: 15px;
+
 }
 
-.upload-box span {
-    display: block;
-    margin: 10px;
+
+.or {
+
     color: #999;
+
+    margin: 12px 0;
+
 }
+
 
 .browse-btn {
+
     display: inline-block;
-    padding: 12px 24px;
+
     background: #222;
+
     color: white;
-    border-radius: 8px;
+
+    padding: 13px 25px;
+
+    border-radius: 9px;
+
     cursor: pointer;
+
+    font-weight: 600;
+
+    transition: opacity 0.2s;
+
 }
+
 
 .browse-btn:hover {
-    opacity: 0.85;
+
+    opacity: 0.8;
+
 }
+
 
 .privacy {
+
     margin-top: 30px;
+
     font-size: 13px;
+
 }
+
+
+/* =========================================
+   PROJECT INFO
+========================================= */
 
 .project-info {
-    margin-top: 25px;
+
+    margin-top: 30px;
+
 }
+
+
+.section-title {
+
+    margin-bottom: 12px;
+
+}
+
+
+.section-title h2 {
+
+    font-size: 22px;
+
+}
+
+
+/* =========================================
+   FILE CARD
+========================================= */
 
 .file-card {
+
     background: white;
+
     border-radius: 12px;
-    padding: 20px;
+
+    padding: 18px 20px;
+
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
 }
 
-.file-card p {
+
+.file-details {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+
+.file-icon {
+
+    font-size: 32px;
+
+}
+
+
+.file-details strong {
+
+    display: block;
+
+    word-break: break-word;
+
+}
+
+
+.file-details p {
+
     color: #777;
+
     margin-top: 5px;
+
+    font-size: 14px;
+
 }
 
-.file-card button {
+
+.remove-btn {
+
     border: none;
+
     background: #eee;
-    padding: 8px 14px;
-    border-radius: 6px;
+
+    padding: 9px 14px;
+
+    border-radius: 7px;
+
     cursor: pointer;
+
 }
+
+
+.remove-btn:hover {
+
+    background: #ddd;
+
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
 
 .actions {
+
     display: flex;
-    gap: 10px;
+
+    gap: 12px;
+
     margin-top: 15px;
+
 }
+
 
 .actions button {
+
     flex: 1;
+
     padding: 14px;
+
     border: none;
-    border-radius: 8px;
+
+    border-radius: 9px;
+
     cursor: pointer;
+
     font-size: 15px;
+
+    font-weight: 600;
+
 }
 
-#previewBtn {
-    background: #ddd;
-}
 
-#convertBtn {
+.play-btn {
+
     background: #222;
+
     color: white;
+
 }
+
+
+.play-btn:hover {
+
+    opacity: 0.85;
+
+}
+
+
+.convert-btn {
+
+    background: #ddd;
+
+    color: #222;
+
+}
+
+
+.convert-btn:hover {
+
+    background: #ccc;
+
+}
+
+
+/* =========================================
+   GAME
+========================================= */
+
+.game-section {
+
+    margin-top: 30px;
+
+    background: #111;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+}
+
+
+.game-header {
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 15px;
+
+}
+
+
+.game-header h2 {
+
+    font-size: 20px;
+
+}
+
+
+.stop-btn {
+
+    border: none;
+
+    background: #333;
+
+    color: white;
+
+    padding: 9px 15px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+}
+
+
+.stop-btn:hover {
+
+    background: #444;
+
+}
+
+
+/* =========================================
+   GAME CONTAINER
+========================================= */
+
+.game-container {
+
+    width: 100%;
+
+    max-width: 640px;
+
+    margin: auto;
+
+    background: black;
+
+    overflow: hidden;
+
+}
+
+
+/*
+    TurboWarp creates the canvas inside
+    this container.
+*/
+
+.game-container canvas {
+
+    display: block;
+
+    width: 100% !important;
+
+    height: auto !important;
+
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
 
 .status {
-    background: white;
+
     margin-top: 20px;
-    padding: 20px;
+
+    padding: 15px 18px;
+
+    background: white;
+
     border-radius: 10px;
-    text-align: center;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
 }
 
-.hidden {
-    display: none;
+
+.status p {
+
+    color: #555;
+
 }
+
+
+/* =========================================
+   FOOTER
+========================================= */
 
 footer {
+
     text-align: center;
-    padding: 40px 20px;
+
+    padding: 45px 20px;
+
     color: #888;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================
+   HIDDEN
+========================================= */
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .header {
+
+        padding-top: 35px;
+
+    }
+
+
+    .header h1 {
+
+        font-size: 34px;
+
+    }
+
+
+    .upload-box {
+
+        padding: 45px 20px;
+
+    }
+
+
+    .file-card {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+    }
+
+
+    .actions {
+
+        flex-direction: column;
+
+    }
+
 }
