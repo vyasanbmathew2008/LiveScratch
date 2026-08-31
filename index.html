@@ -1,46 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>SB3 Web</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <h1>SB3 Web</h1>
+    <div class="container">
 
-    <p>Upload and play your Scratch game</p>
+        <h1>SB3 Web</h1>
 
-    <input
-        type="file"
-        id="fileInput"
-        accept=".sb3"
-    >
-
-    <br><br>
-
-    <button id="playButton">
-        Play Game
-    </button>
-
-    <button id="stopButton">
-        Stop
-    </button>
-
-    <p id="status"></p>
-
-    <div id="game"></div>
+        <p class="subtitle">
+            Upload and play Scratch games
+        </p>
 
 
-    <!-- TurboWarp Scaffolding -->
-    <script src="https://cdn.jsdelivr.net/npm/@turbowarp/scaffolding@0.4.0/dist/scaffolding-min.js"></script>
+        <div class="upload-box">
 
-    <!-- Our JavaScript -->
+            <input
+                type="file"
+                id="fileInput"
+                accept=".sb3"
+            >
+
+            <p id="fileName">
+                No file selected
+            </p>
+
+            <button id="playButton">
+                ▶ Play Game
+            </button>
+
+            <button id="stopButton">
+                ■ Stop
+            </button>
+
+        </div>
+
+
+        <p id="status">
+            Select an SB3 file.
+        </p>
+
+
+        <div id="game"></div>
+
+    </div>
+
+
+    <!--
+        IMPORTANT:
+        Use an exact TurboWarp Scaffolding version.
+        v0.2.0 is the current release shown by the
+        official repository.
+    -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@turbowarp/scaffolding@0.2.0/dist/scaffolding-min.js"></script>
+
     <script src="script.js"></script>
 
 </body>
+
 </html>
