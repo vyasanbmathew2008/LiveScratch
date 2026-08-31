@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>SB3 Web</title>
 
@@ -11,24 +16,52 @@
 
 <body>
 
-    <header>
-        <h1>SB3 Web</h1>
-        <p>Convert Scratch projects into web games</p>
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="container">
+
+            <h1>SB3 Web</h1>
+
+            <p>
+                Play your Scratch projects directly in your browser
+            </p>
+
+        </div>
+
     </header>
 
-    <main>
 
-        <section class="upload-box" id="dropZone">
+    <!-- MAIN -->
+    <main class="container">
 
-            <div class="upload-icon">📁</div>
 
-            <h2>Upload your SB3 project</h2>
+        <!-- UPLOAD -->
+        <section
+            class="upload-box"
+            id="dropZone"
+        >
 
-            <p>Drag & drop your .sb3 file here</p>
+            <div class="upload-icon">
+                📁
+            </div>
 
-            <span>or</span>
+            <h2>
+                Upload your Scratch project
+            </h2>
 
-            <label for="fileInput" class="browse-btn">
+            <p>
+                Drag & drop your <strong>.sb3</strong> file here
+            </p>
+
+            <div class="or">
+                or
+            </div>
+
+            <label
+                for="fileInput"
+                class="browse-btn"
+            >
                 Browse Files
             </label>
 
@@ -40,38 +73,76 @@
             >
 
             <p class="privacy">
-                Your project is processed locally in your browser.
+                🔒 Your project stays in your browser.
             </p>
 
         </section>
 
 
-        <section id="projectInfo" class="project-info hidden">
 
-            <h2>Project</h2>
+        <!-- PROJECT INFORMATION -->
+        <section
+            class="project-info hidden"
+            id="projectInfo"
+        >
+
+            <div class="section-title">
+
+                <h2>
+                    Project
+                </h2>
+
+            </div>
+
 
             <div class="file-card">
 
-                <div>
-                    <strong id="fileName"></strong>
-                    <p id="fileSize"></p>
+                <div class="file-details">
+
+                    <div class="file-icon">
+                        🎮
+                    </div>
+
+                    <div>
+
+                        <strong id="fileName">
+                            project.sb3
+                        </strong>
+
+                        <p id="fileSize">
+                            0 KB
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <button id="removeBtn">
+
+                <button
+                    class="remove-btn"
+                    id="removeBtn"
+                >
                     Remove
                 </button>
 
             </div>
 
 
+            <!-- ACTIONS -->
             <div class="actions">
 
-                <button id="previewBtn">
-                    Preview
+                <button
+                    class="play-btn"
+                    id="previewBtn"
+                >
+                    ▶ Play Game
                 </button>
 
-                <button id="convertBtn">
-                    Convert to Web
+                <button
+                    class="convert-btn"
+                    id="convertBtn"
+                >
+                    Download Web Game
                 </button>
 
             </div>
@@ -79,19 +150,83 @@
         </section>
 
 
-        <section id="status" class="status hidden">
-            <p id="statusText"></p>
+
+        <!-- GAME -->
+        <section
+            class="game-section hidden"
+            id="gameSection"
+        >
+
+            <div class="game-header">
+
+                <h2>
+                    Game
+                </h2>
+
+                <button
+                    id="stopBtn"
+                    class="stop-btn"
+                >
+                    ■ Stop
+                </button>
+
+            </div>
+
+
+            <div
+                id="game"
+                class="game-container"
+            ></div>
+
         </section>
+
+
+
+        <!-- STATUS -->
+        <section
+            class="status hidden"
+            id="status"
+        >
+
+            <span id="statusIcon">
+                ℹ️
+            </span>
+
+            <p id="statusText">
+                Ready
+            </p>
+
+        </section>
+
 
     </main>
 
 
+
+    <!-- FOOTER -->
     <footer>
-        <p>SB3 Web · Open Source</p>
+
+        <p>
+            SB3 Web · Open Source
+        </p>
+
     </footer>
 
 
+
+    <!--
+        TurboWarp Scaffolding
+
+        This provides the Scratch-compatible
+        runtime used to run the SB3 project.
+    -->
+
+    <script src="https://unpkg.com/@turbowarp/scaffolding"></script>
+
+
+    <!-- YOUR JAVASCRIPT -->
     <script src="script.js"></script>
 
 </body>
+
 </html>
