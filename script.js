@@ -1,6 +1,5 @@
-/* =========================================
-   ELEMENTS
-========================================= */
+import Scaffolding from "https://unpkg.com/@turbowarp/scaffolding@latest/dist/scaffolding.mjs";
+
 
 const fileInput =
     document.getElementById("fileInput");
@@ -29,7 +28,7 @@ const convertBtn =
 const gameSection =
     document.getElementById("gameSection");
 
-const gameContainer =
+const game =
     document.getElementById("game");
 
 const stopBtn =
@@ -38,34 +37,29 @@ const stopBtn =
 const status =
     document.getElementById("status");
 
-const statusText =
-    document.getElementById("statusText");
-
 const statusIcon =
     document.getElementById("statusIcon");
 
+const statusText =
+    document.getElementById("statusText");
 
-/* =========================================
-   VARIABLES
-========================================= */
 
 let selectedFile = null;
 
-let scaffolding = null;
+let runtime = null;
 
 
-/* =========================================
-   FILE INPUT
-========================================= */
+/*
+=========================================
+FILE INPUT
+=========================================
+*/
 
 fileInput.addEventListener(
     "change",
-    function () {
+    () => {
 
-        if (
-            fileInput.files &&
-            fileInput.files.length > 0
-        ) {
+        if (fileInput.files.length > 0) {
 
             handleFile(
                 fileInput.files[0]
@@ -77,13 +71,15 @@ fileInput.addEventListener(
 );
 
 
-/* =========================================
-   DRAG OVER
-========================================= */
+/*
+=========================================
+DRAG & DROP
+=========================================
+*/
 
 dropZone.addEventListener(
     "dragover",
-    function (event) {
+    event => {
 
         event.preventDefault();
 
@@ -95,13 +91,9 @@ dropZone.addEventListener(
 );
 
 
-/* =========================================
-   DRAG LEAVE
-========================================= */
-
 dropZone.addEventListener(
     "dragleave",
-    function () {
+    () => {
 
         dropZone.classList.remove(
             "dragover"
@@ -111,13 +103,9 @@ dropZone.addEventListener(
 );
 
 
-/* =========================================
-   DROP
-========================================= */
-
 dropZone.addEventListener(
     "drop",
-    function (event) {
+    event => {
 
         event.preventDefault();
 
@@ -125,15 +113,12 @@ dropZone.addEventListener(
             "dragover"
         );
 
-        const files =
-            event.dataTransfer.files;
+        const file =
+            event.dataTransfer.files[0];
 
-        if (
-            files &&
-            files.length > 0
-        ) {
+        if (file) {
 
-            handleFile(files[0]);
+            handleFile(file);
 
         }
 
@@ -141,15 +126,13 @@ dropZone.addEventListener(
 );
 
 
-/* =========================================
-   HANDLE FILE
-========================================= */
+/*
+=========================================
+HANDLE FILE
+=========================================
+*/
 
 function handleFile(file) {
-
-    /*
-        Check extension
-    */
 
     if (
         !file.name
@@ -158,7 +141,7 @@ function handleFile(file) {
     ) {
 
         showStatus(
-            "Please select a valid .sb3 file.",
+            "Please select an SB3 file.",
             "❌"
         );
 
@@ -167,16 +150,7 @@ function handleFile(file) {
     }
 
 
-    /*
-        Save file
-    */
-
     selectedFile = file;
-
-
-    /*
-        Display information
-    */
 
     fileName.textContent =
         file.name;
@@ -185,30 +159,28 @@ function handleFile(file) {
         formatBytes(file.size);
 
 
-    /*
-        Show project section
-    */
-
     projectInfo.classList.remove(
         "hidden"
     );
 
 
     showStatus(
-        "SB3 project loaded successfully.",
+        "Project loaded successfully.",
         "✅"
     );
 
 }
 
 
-/* =========================================
-   PLAY GAME
-========================================= */
+/*
+=========================================
+PLAY GAME
+=========================================
+*/
 
 previewBtn.addEventListener(
     "click",
-    async function () {
+    async () => {
 
         if (!selectedFile) {
 
@@ -231,106 +203,88 @@ previewBtn.addEventListener(
 
 
             /*
-                Show game container
+                Clear previous runtime
             */
+
+            if (runtime) {
+
+                try {
+                    runtime.stopAll();
+                } catch {}
+
+                runtime = null;
+
+            }
+
+
+            game.innerHTML = "";
+
+
+            /*
+                Create TurboWarp runtime
+            */
+
+            runtime =
+                new Scaffolding();
+
+
+            /*
+                Stage size
+            */
+
+            runtime.width = 480;
+
+            runtime.height = 360;
+
+            runtime.resizeMode =
+                "preserve-ratio";
+
+
+            /*
+                Setup
+            */
+
+            runtime.setup();
+
+
+            /*
+                Add canvas to page
+            */
+
+            runtime.appendTo(game);
+
+
+            /*
+                Read SB3
+            */
+
+            const project =
+                await selectedFile.arrayBuffer();
+
+
+            /*
+                Load project
+            */
+
+            await runtime.loadProject(
+                project
+            );
+
+
+            /*
+                Start project
+            */
+
+            runtime.greenFlag();
+
 
             gameSection.classList.remove(
                 "hidden"
             );
 
 
-            /*
-                Remove previous game
-            */
-
-            gameContainer.innerHTML = "";
-
-
-            /*
-                Check TurboWarp library
-            */
-
-            if (
-                typeof Scaffolding ===
-                "undefined"
-            ) {
-
-                throw new Error(
-                    "TurboWarp runtime could not be loaded."
-                );
-
-            }
-
-
-            /*
-                Create runtime
-            */
-
-            scaffolding =
-                new Scaffolding();
-
-
-            /*
-                Set stage size
-            */
-
-            scaffolding.width =
-                480;
-
-            scaffolding.height =
-                360;
-
-
-            /*
-                Keep aspect ratio
-            */
-
-            scaffolding.resizeMode =
-                "preserve-ratio";
-
-
-            /*
-                Setup runtime
-            */
-
-            scaffolding.setup();
-
-
-            /*
-                Put game into our div
-            */
-
-            scaffolding.appendTo(
-                gameContainer
-            );
-
-
-            /*
-                Read SB3 file
-            */
-
-            const buffer =
-                await selectedFile.arrayBuffer();
-
-
-            /*
-                Load Scratch project
-            */
-
-            await scaffolding.loadProject(
-                buffer
-            );
-
-
-            /*
-                Start game
-            */
-
-            scaffolding.greenFlag();
-
-
             showStatus(
-                "Game started successfully!",
+                "Game started!",
                 "🎮"
             );
 
@@ -338,11 +292,7 @@ previewBtn.addEventListener(
 
         catch (error) {
 
-            console.error(
-                "SB3 Error:",
-                error
-            );
-
+            console.error(error);
 
             showStatus(
                 "Failed to load game: " +
@@ -356,19 +306,21 @@ previewBtn.addEventListener(
 );
 
 
-/* =========================================
-   STOP GAME
-========================================= */
+/*
+=========================================
+STOP
+=========================================
+*/
 
 stopBtn.addEventListener(
     "click",
-    function () {
+    () => {
 
-        if (scaffolding) {
+        if (runtime) {
 
             try {
 
-                scaffolding.stopAll();
+                runtime.stopAll();
 
             }
 
@@ -380,9 +332,7 @@ stopBtn.addEventListener(
 
         }
 
-
-        gameContainer.innerHTML = "";
-
+        game.innerHTML = "";
 
         showStatus(
             "Game stopped.",
@@ -393,61 +343,33 @@ stopBtn.addEventListener(
 );
 
 
-/* =========================================
-   REMOVE PROJECT
-========================================= */
+/*
+=========================================
+REMOVE
+=========================================
+*/
 
 removeBtn.addEventListener(
     "click",
-    function () {
+    () => {
 
-        /*
-            Stop running game
-        */
-
-        if (scaffolding) {
+        if (runtime) {
 
             try {
-
-                scaffolding.stopAll();
-
-            }
-
-            catch (error) {
-
-                console.error(error);
-
-            }
+                runtime.stopAll();
+            } catch {}
 
         }
 
 
-        /*
-            Clear game
-        */
-
-        gameContainer.innerHTML = "";
-
-
-        /*
-            Clear variables
-        */
+        runtime = null;
 
         selectedFile = null;
 
-        scaffolding = null;
-
-
-        /*
-            Reset input
-        */
-
         fileInput.value = "";
 
+        game.innerHTML = "";
 
-        /*
-            Hide sections
-        */
 
         projectInfo.classList.add(
             "hidden"
@@ -465,32 +387,18 @@ removeBtn.addEventListener(
 );
 
 
-/* =========================================
-   DOWNLOAD BUTTON
-========================================= */
+/*
+=========================================
+DOWNLOAD
+=========================================
+*/
 
 convertBtn.addEventListener(
     "click",
-    function () {
-
-        if (!selectedFile) {
-
-            showStatus(
-                "Please upload an SB3 file first.",
-                "❌"
-            );
-
-            return;
-
-        }
-
-
-        /*
-            Not implemented yet.
-        */
+    () => {
 
         showStatus(
-            "The SB3 → standalone HTML packager will be added next.",
+            "Standalone HTML packaging is the next step.",
             "ℹ️"
         );
 
@@ -498,20 +406,22 @@ convertBtn.addEventListener(
 );
 
 
-/* =========================================
-   STATUS MESSAGE
-========================================= */
+/*
+=========================================
+STATUS
+=========================================
+*/
 
 function showStatus(
     message,
-    icon = "ℹ️"
+    icon
 ) {
-
-    statusText.textContent =
-        message;
 
     statusIcon.textContent =
         icon;
+
+    statusText.textContent =
+        message;
 
     status.classList.remove(
         "hidden"
@@ -520,16 +430,16 @@ function showStatus(
 }
 
 
-/* =========================================
-   FORMAT FILE SIZE
-========================================= */
+/*
+=========================================
+FILE SIZE
+=========================================
+*/
 
 function formatBytes(bytes) {
 
     if (bytes === 0) {
-
         return "0 Bytes";
-
     }
 
 
